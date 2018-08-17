@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="app-header">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      h2 {
+        text-align: center;
+        color: #0c0c0c5c;
+      }
+    </style>
+    <h2>Kirubaiye</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AppHeader extends Polymer.Element {
+      static get is() { return 'app-header'; }
+    }
+
+    window.customElements.define(AppHeader.is, AppHeader);
+  </script>
+</dom-module>

@@ -1,0 +1,24 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="load-screen">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>K</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class LoadScreen extends Polymer.Element {
+      static get is() { return 'load-screen'; }
+    }
+
+    window.customElements.define(LoadScreen.is, LoadScreen);
+  </script>
+</dom-module>
