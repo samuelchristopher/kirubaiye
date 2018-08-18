@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+@import url('https://necolas.github.io/normalize.css/8.0.0/normalize.css');
 
 body {
   font-family: 'M PLUS Rounded 1c', sans-serif;
-  background: #eee;
+  background: whitesmoke;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
