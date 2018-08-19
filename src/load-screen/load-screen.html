@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
 <script src="./web-animations.min.js"></script>
 
 <dom-module id="load-screen">
@@ -7,38 +8,8 @@
       :host {
         display: block;
       }
-
-      .load-screen-container {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background: #eee;
-        margin: 0;
-        padding: 0;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .logo {
-        color: rgba(0,0,0,0.3);
-        transition: all 2s ease-in-out;
-        opacity: 0;
-        font-size: 40px;
-      }
-
-      .visible {
-        opacity: 1;
-      }
-
     </style>
-    <div id="container" class="load-screen-container">
-      <h2 id="logo" class="logo">K</h2>
-    </div>
+
   </template>
 
   <script>
@@ -48,27 +19,7 @@
      */
     class LoadScreen extends Polymer.Element {
       static get is() { return 'load-screen'; }
-      ready() {
-        super.ready()
-        let logo = this.$.logo
-        setTimeout(() => {
-          logo.classList.add('visible')
-          logo.animate({
-            transform: ['translateX(40px) rotate(360deg)', 'translateX(-80px) rotate(-180deg)']
-          }, {
-            direction: 'alternate',
-            duration: 2000,
-            iterations: Infinity,
-            easing: 'ease-in-out'
-          })
-        } , 1500)
-
-
-
-      }
     }
-
-
     window.customElements.define(LoadScreen.is, LoadScreen);
   </script>
 </dom-module>

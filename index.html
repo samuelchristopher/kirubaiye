@@ -12,9 +12,20 @@
     <link rel="manifest" href="/manifest.json">
 
     <script src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <script defer src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/animejs/anime.min.js"></script>
+    <script defer src="/src/js/main.js"></script>
+
     <link rel="import" href="/src/kirubaiye-app/kirubaiye-app.html">
   </head>
-  <body class="loading">
+  <body>
+    <div class="load-screen-container">
+      <h2 class="logo-tagline">
+        <span class="logo-move">Kirubaiye</span>
+        <span class="slash">/</span>
+        <span class="logo-move">Ps Satish C</span>
+      </h2>
+    </div>
     <kirubaiye-app></kirubaiye-app>
   </body>
 </html>
