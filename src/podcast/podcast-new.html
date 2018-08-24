@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/iron-input/iron-input.html">
 <link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/vaadin-upload/vaadin-upload.html">
 
 <dom-module id="podcast-new">
@@ -19,23 +20,35 @@
       }
 
       .form {
-        margin:  20px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+      }
+
+      .black {
+        background: black;
+        color: white;
+        margin: 20px;
       }
     </style>
     <p class="heading">new podcast</p>
 
-    <iron-form class="form">
-      <form action="">
-        <iron-input>
-          <paper-input label="Title"></paper-input>
-        </iron-input>
-        <vaadin-upload id="message">
+    <div class="form">
+      <paper-input value="{{title}}" label="Title"></paper-input>
+      <paper-input id="file" type="file" label="Message File"></paper-input>
+      <paper-input type="date" value="{{date}}" label="Date" placeholder="DD/MM/YYYY"></paper-input>
+      <div class="podcast-image"></div>
+      <paper-button on-click="_createNewPodcast" raised class="black">create new podcast</paper-button>
+    </div>
+
+
+        <!-- TODO: add drag and drop -->
+        <!-- <vaadin-upload id="message">
           <span slot="drop-label">Drop message here</span>
-        </vaadin-upload>
+        </vaadin-upload> -->
 
         <!-- <firebase-upload></firebase-upload> -->
-      </form>
-    </iron-form>
   </template>
 
   <script>
@@ -50,8 +63,21 @@
           prop1: {
             type: String,
             value: 'podcast-new'
-          }
+          },
+          title: {
+            type: String
+          },
+          date: {
+            type: Date
+          },
+          file: {
+            type: File
+          },
         };
+      }
+      _createNewPodcast() {
+        console.log('hi!')
+        console.log(this.title, this.$.file, this.date)
       }
     }
 
