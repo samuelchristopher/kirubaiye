@@ -28,3 +28,7 @@ body {
   display: inline-block;
   line-height: 1em;
 }
+
+.center {
+  text-align: center;
+}

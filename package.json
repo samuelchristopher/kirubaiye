@@ -1,0 +1,26 @@
+{
+  "name": "kirubaiye",
+  "version": "1.0.0",
+  "description": "kirubaiye podcasts",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samuelchristopher/kirubaiye.git"
+  },
+  "author": "Samuel Paul Christopher <thesamchris@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samuelchristopher/kirubaiye/issues"
+  },
+  "homepage": "https://github.com/samuelchristopher/kirubaiye#readme",
+  "dependencies": {
+    "unsplash-js": "^4.8.0",
+    "unsplash-source-js": "^1.0.0"
+  }
+}
