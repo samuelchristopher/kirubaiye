@@ -1,13 +1,18 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="kirubaiye-app">
+<dom-module id="podcast-all">
   <template>
     <style>
       :host {
         display: block;
       }
+
+      .heading {
+        text-align: center;
+      }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+    <p class="heading">all podcasts</p>
+
   </template>
 
   <script>
@@ -15,18 +20,18 @@
      * @customElement
      * @polymer
      */
-    class KirubaiyeApp extends Polymer.Element {
-      static get is() { return 'kirubaiye-app'; }
+    class PodcastAll extends Polymer.Element {
+      static get is() { return 'podcast-all'; }
       static get properties() {
         return {
           prop1: {
             type: String,
-            value: 'kirubaiye-app'
+            value: 'podcast-all'
           }
         };
       }
     }
 
-    window.customElements.define(KirubaiyeApp.is, KirubaiyeApp);
+    window.customElements.define(PodcastAll.is, PodcastAll);
   </script>
 </dom-module>

@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="podcast-view">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .heading {
+        text-align: center;
+      }
+    </style>
+    <p class="heading">view podcast</p>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PodcastView extends Polymer.Element {
+      static get is() { return 'podcast-view'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'podcast-view'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PodcastView.is, PodcastView);
+  </script>
+</dom-module>

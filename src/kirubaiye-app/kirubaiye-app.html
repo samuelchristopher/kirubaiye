@@ -1,6 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="./app-header.html">
-<link rel="import" href="../load-screen/load-screen.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../podcast/podcast-all.html">
+<link rel="import" href="../podcast/podcast-view.html">
 
 <dom-module id="kirubaiye-app">
   <template>
@@ -8,9 +11,25 @@
       :host {
         display: block;
       }
+
+      .heading {
+        text-align: center;
+      }
     </style>
-    <load-screen></load-screen>
-    <app-header></app-header>
+    <h2 class="heading">Kirubaiye</h2>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:view"
+      data="{{routeData}}"
+      tail="{{subroute}}"></app-route>
+
+    <iron-pages selected="[[routeData.view]]" attr-for-selected="name" fallback-selection="all">
+      <podcast-all name="all"></podcast-all>
+      <podcast-view name="view"></podcast-view>
+    </iron-pages>
+
   </template>
 
   <script>

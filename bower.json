@@ -5,7 +5,9 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "jquery": "^3.3.1",
-    "animejs": "^2.2.0"
+    "animejs": "^2.2.0",
+    "app-route": "PolymerElements/app-route#^2.1.2",
+    "iron-pages": "PolymerElements/iron-pages#^2.1.1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
