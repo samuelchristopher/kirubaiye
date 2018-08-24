@@ -1,0 +1,61 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/vaadin-upload/vaadin-upload.html">
+
+<dom-module id="podcast-new">
+  <template>
+    <style>
+      :root {
+        --paper-input-container-focus-color: black;
+      }
+      :host {
+        display: block;
+      }
+
+      .heading {
+        text-align: center;
+      }
+
+      .form {
+        margin:  20px;
+      }
+    </style>
+    <p class="heading">new podcast</p>
+
+    <iron-form class="form">
+      <form action="">
+        <iron-input>
+          <paper-input label="Title"></paper-input>
+        </iron-input>
+        <vaadin-upload id="message">
+          <span slot="drop-label">Drop message here</span>
+        </vaadin-upload>
+
+        <!-- <firebase-upload></firebase-upload> -->
+      </form>
+    </iron-form>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PodcastNew extends Polymer.Element {
+      static get is() { return 'podcast-new'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'podcast-new'
+          }
+        };
+      }
+    }
+
+
+    window.customElements.define(PodcastNew.is, PodcastNew);
+  </script>
+</dom-module>

@@ -1,5 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 <dom-module id="podcast-all">
   <template>
     <style>
@@ -12,7 +12,15 @@
       }
     </style>
     <p class="heading">all podcasts</p>
+    <firebase-query
+      id="query"
+      path="/podcasts"
+      data="{{podcasts}}"
+    ></firebase-query>
 
+    <template is="dom-repeat" items="{{podcasts}}" as="podcast">
+      <input value="{{podcast.title}}">
+    </template>
   </template>
 
   <script>
@@ -27,6 +35,9 @@
           prop1: {
             type: String,
             value: 'podcast-all'
+          },
+          podcasts: {
+            type: Object
           }
         };
       }
