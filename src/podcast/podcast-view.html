@@ -1,4 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
 
 <dom-module id="podcast-view">
   <template>
@@ -11,7 +14,17 @@
         text-align: center;
       }
     </style>
-    <p class="heading">view podcast</p>
+    <p class="heading">view podcast {{routeData.accessUrl}}</p>
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/p/:accessUrl"
+      data="{{routeData}}"
+      tail="{{subroute}}"></app-route>
+
+    <div class="podcast">
+      <h1>{{selectedPodcast.title}}</h1>
+    </div>
 
   </template>
 
@@ -27,8 +40,29 @@
           prop1: {
             type: String,
             value: 'podcast-view'
+          },
+          selectedPodcast: {
+            type: Object
+          },
+          podcast: {
+            type: Object,
+            notify: true,
+            computed: 'getPodcast()'
+          },
+          key: {
+            type: String,
+            notify: true
           }
-        };
+        }
+      }
+
+      getPodcast() {
+        let ref = firebase.database().ref('podcasts/')
+        ref.orderByChild('accessUrl').equalTo(window.location.pathname.split('/')[2]).on('child_added', function(snapshot) {
+          selectedPodcast = snapshot.val()
+          return snapshot.val()
+        })
+
       }
     }
 

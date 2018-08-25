@@ -41,6 +41,7 @@
       <paper-input id="file" type="file" label="Message File"></paper-input>
       <p class="center">[[progress]]</p>
       <paper-input type="date" value="{{date}}" label="Date"></paper-input>
+      <paper-input type="accessUrl" value="{{accessUrl}}" label="Access URL"></paper-input>
       <paper-button on-click="_createNewPodcast" raised class="black">create new podcast</paper-button>
     </div>
     <paper-toast id="toast" text="[[messageToUser]]"></paper-toast>
@@ -83,11 +84,14 @@
           progress: {
             type: String,
             notify: true
+          },
+          accessUrl: {
+            type: String
           }
         };
       }
       _createNewPodcast() {
-        let { title, date } = this
+        let { title, date, accessUrl } = this
         let file = this.$.file.inputElement.inputElement.files[0]
         let ref = firebase.storage().ref().child(`messages/${file.name}`)
         let uploadTask = ref.put(file)
@@ -104,8 +108,9 @@
             let newPodcast = {
               title,
               date,
-              url,
-              imgUrl
+              audioUrl: url,
+              imgUrl,
+              accessUrl
             }
             firebase.database().ref('podcasts/').push(newPodcast)
             this.messageToUser = 'New podcast has successfully been added'
