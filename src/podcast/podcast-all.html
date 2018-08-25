@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
+<link rel="import" href="./podcast-card.html">
 <dom-module id="podcast-all">
   <template>
     <style>
@@ -10,17 +11,33 @@
       .heading {
         text-align: center;
       }
+
+      .podcasts-container {
+        display: flex;
+        max-width: 500px;
+        padding: 0 20px 0 20px;
+        margin: 20px auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
     </style>
-    <p class="heading">all podcasts</p>
+    <p class="heading">all sermons</p>
     <firebase-query
       id="query"
       path="/podcasts"
       data="{{podcasts}}"
     ></firebase-query>
-
-    <template is="dom-repeat" items="{{podcasts}}" as="podcast">
-      <input value="{{podcast.title}}">
-    </template>
+    <div class="podcasts-container">
+      <template is="dom-repeat" items="{{podcasts}}" as="podcast">
+        <podcast-card
+        title="[[podcast.title]]"
+        image-url="[[podcast.imgUrl]]"
+        date="[[podcast.date]]"
+        url="[[podcast.url]]"
+        ></podcast-card>
+      </template>
+    </div>
   </template>
 
   <script>
