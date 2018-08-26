@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/app-route/app-location.html">
-<link rel="import" href="../../bower_components/polymerfire/firebase-document.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-query.html">
 
 <dom-module id="podcast-view">
   <template>
@@ -13,6 +13,34 @@
       .heading {
         text-align: center;
       }
+
+      .podcast {
+        box-shadow: 4px 5px 16px 0px rgba(0,0,0,0.1);
+        width: 500px;
+        border-radius: 22px;
+        background-size: cover;
+        background-position: center;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        margin: 20px auto;
+      }
+
+      .podcast__title {
+        margin-bottom: 10px;
+        background-color: black;
+      }
+
+      .podcast__date {
+        margin-top: 0px;
+      }
+
+      .audio {
+        margin: 20px 0;
+      }
     </style>
     <p class="heading">view podcast {{routeData.accessUrl}}</p>
     <app-location route="{{route}}"></app-location>
@@ -21,10 +49,21 @@
       pattern="/p/:accessUrl"
       data="{{routeData}}"
       tail="{{subroute}}"></app-route>
+      <firebase-query
+        path="/podcasts"
+        data="{{podcasts}}">
+      </firebase-query>
+      <template is="dom-repeat" filter="isSelectedPodcast" items="{{podcasts}}" as="podcast">
+        <div class="podcast" style="background-image: url({{podcast.imgUrl}})">
+          <h1 class="podcast__title">{{podcast.title}}</h1>
+          <p class="podcast__date">{{podcast.date}}</p>
+          <audio class="audio" controls>
+            <source src="{{podcast.audioUrl}}" type="audio/mpeg">
+          Your browser does not support the audio element.
+          </audio>
+        </div>
 
-    <div class="podcast">
-      <h1>{{selectedPodcast.title}}</h1>
-    </div>
+      </template>
 
   </template>
 
@@ -46,8 +85,7 @@
           },
           podcast: {
             type: Object,
-            notify: true,
-            computed: 'getPodcast()'
+            notify: true
           },
           key: {
             type: String,
@@ -56,13 +94,8 @@
         }
       }
 
-      getPodcast() {
-        let ref = firebase.database().ref('podcasts/')
-        ref.orderByChild('accessUrl').equalTo(window.location.pathname.split('/')[2]).on('child_added', function(snapshot) {
-          selectedPodcast = snapshot.val()
-          return snapshot.val()
-        })
-
+      isSelectedPodcast(podcast) {
+        return `${podcast.accessUrl}` === `${this.routeData.accessUrl}`
       }
     }
 
