@@ -42,7 +42,6 @@
         margin: 20px 0;
       }
     </style>
-    <p class="heading">view podcast {{routeData.accessUrl}}</p>
     <app-location route="{{route}}"></app-location>
     <app-route
       route="{{route}}"
@@ -62,7 +61,6 @@
           Your browser does not support the audio element.
           </audio>
         </div>
-
       </template>
 
   </template>
@@ -90,6 +88,10 @@
           key: {
             type: String,
             notify: true
+          },
+          routeData: {
+            type: Object,
+            notify: true,
           }
         }
       }

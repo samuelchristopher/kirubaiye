@@ -6,6 +6,7 @@
 <link rel="import" href="../podcast/podcast-all.html">
 <link rel="import" href="../podcast/podcast-view.html">
 <link rel="import" href="../podcast/podcast-new.html">
+<link rel="import" href="./kirubaiye-header.html">
 
 <dom-module id="kirubaiye-app">
   <template>
@@ -33,7 +34,7 @@
       tail="{{subroute}}"></app-route>
 
 
-    <h2 class="heading">Kirubaiye</h2>
+    <kirubaiye-header></kirubaiye-header>
     <iron-pages selected="[[routeData.view]]" attr-for-selected="name" fallback-selection="all">
       <podcast-all name="all"></podcast-all>
       <podcast-view name="p"></podcast-view>
