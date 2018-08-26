@@ -1,0 +1,92 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="podcast-card">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .heading {
+        text-align: center;
+      }
+
+      .image {
+        height: 200px;
+        width: 200px;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .podcast {
+        box-shadow: 4px 5px 16px 0px rgba(0,0,0,0.1);
+        width: 200px;
+        border-radius: 22px;
+        overflow: hidden;
+        transition: all 200ms ease-in-out;
+        perspective: none;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        margin: 20px 0;
+      }
+
+      .title {
+        padding: 0 0 0 25px;
+        text-transform: uppercase;
+        color: black;
+      }
+      .date {
+        padding-left: 25px;
+        color: black;
+      }
+      .podcast-link {
+        text-decoration: none;
+      }
+
+      .podcast:hover {
+        backface-visibility: hidden;
+        transform: translateZ(0) scale(1.025);
+      }
+    </style>
+    <div class="podcast">
+      <a class="podcast-link" href="/p/{{accessUrl}}">
+        <div class="image" style="background-image: url({{imageUrl}});"></div>
+        <h3 class="title">{{title}}</h3>
+        <p class="date">{{date}}</p>
+      </a>
+    </div>
+  </template>
+
+  <script>/**
+ * @customElement
+ * @polymer
+ */
+class PodcastCard extends Polymer.Element {
+  static get is() {
+    return 'podcast-card';
+  }
+
+  static get properties() {
+    return {
+      title: {
+        type: String
+      },
+      date: {
+        type: Date
+      },
+      imageUrl: {
+        type: String
+      },
+      url: {
+        type: String
+      },
+      accessUrl: {
+        type: String
+      }
+    };
+  }
+
+}
+
+window.customElements.define(PodcastCard.is, PodcastCard);</script>
+</dom-module>

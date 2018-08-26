@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-route/app-route.html">
+<link rel="import" href="../../bower_components/app-route/app-location.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="../podcast/podcast-all.html">
+<link rel="import" href="../podcast/podcast-view.html">
+<link rel="import" href="../podcast/podcast-new.html">
+<link rel="import" href="./kirubaiye-header.html">
+
+<dom-module id="kirubaiye-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .heading {
+        text-align: center;
+      }
+    </style>
+    <firebase-app auth-domain="kir-1-ec69d.firebaseapp.com" database-url="https://kir-1-ec69d.firebaseio.com" api-key="AIzaSyC72cZxzkj9dYB4jNjH8hfe9YLKjJ5Qr44" storage-bucket="kir-1-ec69d.appspot.com" messaging-sender-id="317445059045">
+    </firebase-app>
+    <app-location route="{{route}}"></app-location>
+    <app-route route="{{route}}" pattern="/:view" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+
+    <kirubaiye-header></kirubaiye-header>
+    <iron-pages selected="[[routeData.view]]" attr-for-selected="name" fallback-selection="all">
+      <podcast-all name="all"></podcast-all>
+      <podcast-view name="p"></podcast-view>
+      <podcast-new name="new"></podcast-new>
+    </iron-pages>
+
+  </template>
+
+  <script>/**
+ * @customElement
+ * @polymer
+ */
+class KirubaiyeApp extends Polymer.Element {
+  static get is() {
+    return 'kirubaiye-app';
+  }
+
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'kirubaiye-app'
+      }
+    };
+  }
+
+}
+
+window.customElements.define(KirubaiyeApp.is, KirubaiyeApp);</script>
+</dom-module>

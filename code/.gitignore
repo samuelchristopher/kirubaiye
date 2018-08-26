@@ -1,6 +1,5 @@
 
 # Created by https://www.gitignore.io/api/node,macos,bower,polymer,windows,firebase
-
 ### Bower ###
 bower_components
 .bower-cache
