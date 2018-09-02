@@ -1,0 +1,131 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/vaadin-upload/vaadin-upload.html">
+
+
+<dom-module id="podcast-new">
+  <template>
+    <style>
+      :root {
+        --paper-input-container-focus-color: black;
+      }
+      :host {
+        display: block;
+      }
+
+      .heading {
+        text-align: center;
+      }
+
+      .form {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        width: 250px;
+      }
+
+      .black {
+        background: black;
+        color: white;
+        margin: 20px;
+      }
+    </style>
+    <p class="heading">new podcast</p>
+
+    <div class="form">
+      <paper-input value="{{title}}" label="Title"></paper-input>
+      <paper-input id="file" type="file" label="Message File"></paper-input>
+      <p class="center">[[progress]]</p>
+      <paper-input type="date" value="{{date}}" label="Date"></paper-input>
+      <paper-input type="accessUrl" value="{{accessUrl}}" label="Access URL"></paper-input>
+      <paper-button on-click="_createNewPodcast" raised="" class="black">create new podcast</paper-button>
+    </div>
+    <paper-toast id="toast" text="[[messageToUser]]"></paper-toast>
+
+        <!-- TODO: add drag and drop -->
+        <!-- <vaadin-upload id="message">
+          <span slot="drop-label">Drop message here</span>
+        </vaadin-upload> -->
+
+        <!-- <firebase-upload></firebase-upload> -->
+  </template>
+
+  <script>/**
+ * @customElement
+ * @polymer
+ */
+class PodcastNew extends Polymer.Element {
+  static get is() {
+    return 'podcast-new';
+  }
+
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'podcast-new'
+      },
+      title: {
+        type: String
+      },
+      date: {
+        type: Date
+      },
+      file: {
+        type: File
+      },
+      messageToUser: {
+        type: String,
+        notify: true
+      },
+      progress: {
+        type: String,
+        notify: true
+      },
+      accessUrl: {
+        type: String
+      }
+    };
+  }
+
+  _createNewPodcast() {
+    let {
+      title,
+      date,
+      accessUrl
+    } = this;
+    let file = this.$.file.inputElement.inputElement.files[0];
+    let ref = firebase.storage().ref().child(`messages/${file.name}`);
+    let uploadTask = ref.put(file);
+    let imgUrl;
+    fetch('https://source.unsplash.com/category/nature/all/1000x1200?nature').then(res => {
+      imgUrl = res.url;
+    });
+    uploadTask.on('state_changed', snapshot => {
+      let progressCount = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+      this.progress = `${progressCount}% uploaded`;
+    }, err => console.log(err), () => {
+      uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+        let url = downloadURL;
+        let newPodcast = {
+          title,
+          date,
+          audioUrl: url,
+          imgUrl,
+          accessUrl
+        };
+        firebase.database().ref('podcasts/').push(newPodcast);
+        this.messageToUser = 'New podcast has successfully been added';
+        this.$.toast.open();
+      });
+    });
+  }
+
+}
+
+window.customElements.define(PodcastNew.is, PodcastNew);</script>
+</dom-module>
